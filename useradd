@@ -1,3 +1,16 @@
+批量添加用户
+信息userlist文档编辑如下：
+carol 1777 sales uplooking
+natasha 1778 it uplooking1
+r1 1779 pg uplooking123
+
+\\while read line 是读取userlist里面的数据以一行一次的读取，程序设定如此。
+
+1)创建组		groupadd sales
+2)创建用户	useradd -u 1777 -G sales carol
+3)赋予密码	echo uplooking | passwd --stdin carol
+
+
 while read line
 do
 	L=($line)
