@@ -1,0 +1,11 @@
+while read line
+do
+	L=($line)
+	group=${L[2]}
+	username=${L[0]}
+	uid=${L[1]}
+	password=${L[3]}
+	groupadd $group
+	useradd -u $uid -G $group $username
+	echo $password | passwd --stdin $username
+done < /root/shell/userlist
