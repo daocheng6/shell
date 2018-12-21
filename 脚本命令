@@ -1,0 +1,80 @@
+使用bash写一个脚本autocheckos实现以下功能：
+
+    	    -r 查看系统发行版本
+	    -k 查看系统内核版本
+	    -d 查看系统磁盘信息(已挂接的文件系统的使用情况)
+      	    -u 查看当前系统用户
+	    -t 查看系统运行时间
+	    -s 查看selinux状态
+	    -f 查看内存信息
+	    -n 查看网络信息
+	    -a 实现以上所有功能 
+	    --help 查看帮助
+      
+[root@server0 shell]# cat autocheckos 
+#!/bin/bash
+RE(){
+	cat /etc/redhat-release
+}
+
+UN(){
+	uname -r
+}
+
+DF(){
+	df -h
+}
+
+WH(){
+	whoami
+}
+
+UP(){
+	uptime
+}
+
+SE(){
+	getenforce
+}
+
+FR(){
+	free
+}
+
+NE(){
+	ifconfig
+}
+
+all(){
+	RE
+	UN
+	DF
+	WH
+	UP
+	SE
+	FR
+	NE
+}
+case $1 in
+-r)
+	RE;;
+-k)
+	UN;;
+-d)
+	DF;;
+-u)
+	WH;;
+-t)
+	UP;;
+-s)
+	SE;;
+-f)
+	FR;;
+-n)
+	NE;;
+-a)
+	all;;
+--help)
+	echo 帮助;;
+esac	
+      
